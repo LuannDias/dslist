@@ -4,7 +4,7 @@
 
 **Dslist** é um projeto backend em Java construído durante a semana do **Intensivão Java Spring** de agosto de 2025, evento organizado pela [DevSuperior](https://devsuperior.com.br/).
 
-O projeto consiste em um servidor backend que fornece uma lista de jogos eletrônicos, oferecendo endpoints para buscar todos os jogos, buscar jogo por ID, buscar listas de gêneros de jogos e listar os jogos de determinado gênero.
+O projeto consiste em um servidor backend que fornece uma lista de jogos eletrônicos, oferecendo endpoints para buscar todos os jogos, buscar jogo por ID, buscar listas de gêneros de jogos, listar os jogos de determinado gênero e mover os jogos na lista de um determinado gênero.
 
 ## Modelo conceitual
 ![Modelo Conceitual](https://github.com/LuannDias/assets/blob/main/dslist/dslist-model.png)
@@ -42,13 +42,22 @@ Acesse os endpoints abaixo em seu navegador (ou via ferramentas como Postman) pa
 
 ```bash
 # Lista de todos os jogos (findAll)
-http://localhost:8080/games
+GET http://localhost:8080/games
 
 # Buscar jogo por ID (troque o "2" por outro número de 1 a 10, existem 10 jogos registrados)
-http://localhost:8080/games/2
+GET http://localhost:8080/games/2
 
 # Listar todos os gêneros disponíveis (existem 2 registrados)
-http://localhost:8080/lists
+GET http://localhost:8080/lists
 
 # Buscar todos os jogos de um determinado gênero (existem duas listas: id 1 e 2)
-http://localhost:8080/lists/1/games
+GET http://localhost:8080/lists/1/games
+
+# Mover jogos na lista de um determinado gênero (existem duas listas: id 1 e 2)
+POST http://localhost:8080/lists/2/replacement
+é necessário passar um body (JSON) contendo a posição do jogo que você deseja mover (sourceIndex) e a posição que ele deve assumir (destinationIndex).
+Ex:
+{
+    "sourceIndex": 3,
+    "destinationIndex": 1
+}
